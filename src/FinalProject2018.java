@@ -9,7 +9,7 @@ import javax.swing.text.*;
  *   SpringUtilities.java
  *   ...
  */
-public class FinalProj2018 extends JPanel  
+public class FinalProject2018 extends JPanel  
 										  implements ActionListener,
                                                      FocusListener {
     JTextField streetField, cityField;
@@ -19,13 +19,15 @@ public class FinalProj2018 extends JPanel
     Font regularFont, italicFont;
     JLabel addressDisplay;
     final static int GAP = 10;
+//    static final long serialVersionUID;
 
-    public FinalProj2018() {
+    public FinalProject2018() {
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
         JPanel leftHalf = new JPanel() {
             //Don't allow us to stretch vertically.
-            public Dimension getMaximumSize() {
+            @Override
+			public Dimension getMaximumSize() {
                 Dimension pref = getPreferredSize();
                 return new Dimension(Integer.MAX_VALUE,
                                      pref.height);
@@ -63,7 +65,8 @@ public class FinalProj2018 extends JPanel
      * Called when the user clicks the button or presses
      * Enter in a text field.
      */
-    public void actionPerformed(ActionEvent e) {
+    @Override
+	public void actionPerformed(ActionEvent e) {
         if ("clear".equals(e.getActionCommand())) {
             addressSet = false;
             streetField.setText("");
@@ -90,7 +93,7 @@ public class FinalProj2018 extends JPanel
     protected JComponent createAddressDisplay() {
         JPanel panel = new JPanel(new BorderLayout());
         addressDisplay = new JLabel();
-        addressDisplay.setHorizontalAlignment(JLabel.CENTER);
+        addressDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         regularFont = addressDisplay.getFont().deriveFont(Font.PLAIN,
                                                             16.0f);
         italicFont = regularFont.deriveFont(Font.ITALIC);
@@ -102,7 +105,7 @@ public class FinalProj2018 extends JPanel
                                 0,     //left
                                 GAP/2, //bottom
                                 0));   //right
-        panel.add(new JSeparator(JSeparator.VERTICAL),
+        panel.add(new JSeparator(SwingConstants.VERTICAL),
                   BorderLayout.LINE_START);
         panel.add(addressDisplay,
                   BorderLayout.CENTER);
@@ -167,7 +170,8 @@ public class FinalProj2018 extends JPanel
      * Called when one of the fields gets the focus so that
      * we can select the focused field.
      */
-    public void focusGained(FocusEvent e) {
+    @Override
+	public void focusGained(FocusEvent e) {
         Component c = e.getComponent();
         if (c instanceof JFormattedTextField) {
             selectItLater(c);
@@ -181,7 +185,8 @@ public class FinalProj2018 extends JPanel
         if (c instanceof JFormattedTextField) {
             final JFormattedTextField ftf = (JFormattedTextField)c;
             SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     ftf.selectAll();
                 }
             });
@@ -189,7 +194,8 @@ public class FinalProj2018 extends JPanel
     }
 
     //Needed for FocusListener interface.
-    public void focusLost(FocusEvent e) { } //ignore
+    @Override
+	public void focusLost(FocusEvent e) { } //ignore
 
     protected JComponent createEntryFields() {
         JPanel panel = new JPanel(new SpringLayout());
@@ -226,7 +232,7 @@ public class FinalProj2018 extends JPanel
         //and lay it out.
         for (int i = 0; i < labelStrings.length; i++) {
             labels[i] = new JLabel(labelStrings[i],
-                                   JLabel.TRAILING);
+                                   SwingConstants.TRAILING);
             labels[i].setLabelFor(fields[i]);
             panel.add(labels[i]);
             panel.add(fields[i]);
@@ -328,10 +334,10 @@ public class FinalProj2018 extends JPanel
 
         //Create and set up the window.
         JFrame frame = new JFrame("FinalProj2018");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        JComponent newContentPane = new FinalProj2018();
+        JComponent newContentPane = new FinalProject2018();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
@@ -344,7 +350,8 @@ public class FinalProj2018 extends JPanel
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 createAndShowGUI();
             }
         });

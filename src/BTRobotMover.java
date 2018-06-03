@@ -33,7 +33,6 @@ public class BTRobotMover extends JPanel
     String directory = "";
     String filename = "";
     String port = "";
-//    Font bigFont = new Font("Verdana", Font.PLAIN, 20);
 
     public BTRobotMover() {
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
@@ -128,8 +127,8 @@ public class BTRobotMover extends JPanel
 		boolean alreadyTurned = false;
 		
     	try {
-			bufRead = new BufferedReader(new FileReader(csvDir + filename));
-
+//			bufRead = new BufferedReader(new FileReader(csvDir + filename));
+    		bufRead = new BufferedReader(new FileReader(directory + filename));
 			while ((line = bufRead.readLine()) != null)	{
 				lineCount++;
 			
@@ -222,7 +221,7 @@ public class BTRobotMover extends JPanel
                   BorderLayout.LINE_START);
         panel.add(inputDisplay,
                   BorderLayout.CENTER);
-        panel.setPreferredSize(new Dimension(200, 150));
+        panel.setPreferredSize(new Dimension(800, 150));
 
         return panel;
     }
@@ -258,8 +257,8 @@ public class BTRobotMover extends JPanel
         sb.append("<html><p align=left>");
         sb.append("<B>Processing...</B>");
         sb.append("<br>");
-        sb.append("Directory: C:\\Users\\dresdon\\Documents\\APCSP\\FinalProject2018\\");
-//        sb.append(directory);
+        sb.append("Directory: ");
+        sb.append(directory);
         sb.append("<br>");
         sb.append("Filename: ");
         sb.append(filename);
